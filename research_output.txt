@@ -1,0 +1,11 @@
+--- Research Output ---
+Timestamp: 2025-06-29 01:31:12
+
+Topic: VEX Robotics Competition team 210Z
+
+Summary: Team 210Z is a VEX Robotics Competition team from Calgary, Alberta, Canada. They participated in the VEX Robotics World Championship 2025 in Dallas, where they advanced to the Divisional Quarter Finals. The team is considered one of Calgary's elite teams and has competed in high-level matches, including partnering with team 210K in regional finals against teams 221X and 3388S. Their performance at the World Championship and in regional competitions demonstrates their skill and competitiveness in the VEX Robotics scene.
+
+Sources: Western Mechatronics Instagram post, Alberta Regionals Division 1 Final match description, VEX Robotics World Championship 2025 results
+
+Tools Used: search_tool
+

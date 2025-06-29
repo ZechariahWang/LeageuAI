@@ -6,6 +6,7 @@ import os
 import sys
 from riotwatcher import RiotWatcher
 from dotenv import load_dotenv
+from AgentHandler.Agent import AgentCall
 
 load_dotenv()
 
@@ -192,6 +193,7 @@ def get_player_info(player_number):
     
     game_name = input(f"Enter the game name for Player {player_number}: ")
     tag_line = input(f"Enter the tag line for Player {player_number} (e.g., NA1): ")
+    rank = input(f"Enter the rank for Player {player_number}: ")
     
     valid_regions = ['americas', 'asia', 'europe', 'sea']
     while True:
@@ -200,7 +202,7 @@ def get_player_info(player_number):
             break
         print(f"Invalid region '{region}'. Please choose from: {', '.join(valid_regions)}")
     
-    return game_name, tag_line, region
+    return game_name, tag_line, region, rank
 
 def format_rank(rank_data, queue_type):
     if queue_type not in rank_data:
@@ -291,11 +293,23 @@ def get_player_match_data(puuid, region, game_name, count=3):
 
 def main():
     print("Riot API Player Comparison Tool")
-    print("This tool compares the last 3 matches and ranks of two players")
+    print("Choose an option:")
+    print("1. Compare two players")
+    print("2. Research VEX teams with AI Agent")
+    
+    choice = input("Enter your choice (1 or 2): ")
+    
+    if choice == "2":
+        AgentCall()
+        return
+    elif choice == "1":
+        print("This tool compares the last 3 matches and ranks of two players")
+    else:
+        print("Invalid choice. Defaulting to player comparison.")
     
     try:
-        player1_name, player1_tag, player1_region = get_player_info(1)
-        player2_name, player2_tag, player2_region = get_player_info(2)
+        player1_name, player1_tag, player1_region, player1_rank = get_player_info(1)
+        player2_name, player2_tag, player2_region, player2_rank = get_player_info(2)
         
         print(f"\nGetting PUUID for {player1_name}#{player1_tag}...")
         player1_puuid = get_puuid(player1_name, player1_tag, player1_region)
@@ -326,7 +340,7 @@ def main():
         if len(player1_matches) < 3 or len(player2_matches) < 3:
             print("Warning: One or both players don't have 3 recent matches available.")
         
-        compare_matches(player1_matches, player2_matches, f"{player1_name}#{player1_tag}", f"{player2_name}#{player2_tag}", player1_ranks, player2_ranks)
+        compare_matches(player1_matches, player2_matches, f"{player1_name}#{player1_tag}", f"{player2_name}#{player2_tag}", player1_rank, player2_rank)
         
     except KeyboardInterrupt:
         print("\nExiting...")
@@ -336,4 +350,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
